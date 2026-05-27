@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Transaksi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 40px;
+            background-color: #0B0F19; /* Deep dark background */
+            color: #E2E8F0;
+        }
+
+        .card {
+            background: #111827; /* Dark card background */
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 12px;
+            border: 1px solid #1F2937;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            color: #F8FAFC;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            color: #F8FAFC;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #10B981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-submit {
+            background-color: #10B981; /* Green accent */
+            color: #022C22;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #34D399; /* Lighter green */
+            transform: translateY(-1px);
+        }
+
+        .btn-cancel {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #9CA3AF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .btn-cancel:hover {
+            color: #F8FAFC;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Ubah Data Transaksi</h2>
+        <form method="POST" action="/edit/{{ item[0] }}">
+            <div class="form-group">
+                <label>Jenis Transaksi</label>
+                <select name="jenis_transaksi" required>
+                    <option value="BELI" {% if item[6]=='BELI' %}selected{% endif %}>BELI (Uang Keluar)</option>
+                    <option value="JUAL" {% if item[6]=='JUAL' %}selected{% endif %}>JUAL (Uang Masuk)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nama Aset</label>
+                <input type="text" name="nama_aset" value="{{ item[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Jumlah Unit/Lot</label>
+                <input type="number" step="0.01" name="jumlah" value="{{ item[2] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Harga Per Unit (Rp)</label>
+                <input type="number" step="0.01" name="harga_beli" value="{{ item[3] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Fee Transaksi (%) — *Estimasi ulang nominal</label>
+                <input type="number" step="0.001" name="fee_persen" value="0.20" required>
+            </div>
+            <div class="form-group">
+                <label>Tanggal Transaksi</label>
+                <input type="date" name="tanggal_beli" value="{{ item[4] }}" required>
+            </div>
+            <button type="submit" class="btn-submit">Simpan Perubahan</button>
+            <a href="/" class="btn-cancel">Batal</a>
+        </form>
+    </div>
+</body>
+
+</html>

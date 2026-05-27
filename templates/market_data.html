@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Download Data Pasar - YFinance</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 40px;
+            background-color: #0B0F19; /* Deep dark background */
+            color: #E2E8F0;
+        }
+
+        .card {
+            background: #111827; /* Dark card background */
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 12px;
+            border: 1px solid #1F2937;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            color: #F8FAFC;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            color: #9CA3AF;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .alert-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #FCA5A5;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            color: #F8FAFC;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #10B981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-submit {
+            background-color: #10B981; /* Green accent */
+            color: #022C22;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #34D399; /* Lighter green */
+            transform: translateY(-1px);
+        }
+
+        .btn-cancel {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #9CA3AF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .btn-cancel:hover {
+            color: #F8FAFC;
+        }
+        
+        .hint {
+            font-size: 12px;
+            color: #6B7280;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Download Data Pasar Saham</h2>
+        <p class="subtitle">Ambil historis data harga saham langsung dari Yahoo Finance.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/download_yfinance">
+            <div class="form-group">
+                <label>Ticker Symbol (Kode Saham)</label>
+                <input type="text" name="ticker" placeholder="Contoh: AAPL, MSFT, BBCA.JK, GOTO.JK" required>
+                <span class="hint">*Gunakan akhiran .JK untuk saham Indonesia (misal: BBRI.JK)</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Timeframe (Interval)</label>
+                <select name="timeframe" required>
+                    <option value="1h">Hourly (1 Jam)</option>
+                    <option value="1d" selected>Daily (1 Hari)</option>
+                    <option value="1wk">Weekly (1 Minggu)</option>
+                </select>
+                <span class="hint">*Catatan: Data Hourly biasanya terbatas untuk periode 730 hari terakhir.</span>
+            </div>
+
+            <div class="form-group">
+                <label>Periode Waktu</label>
+                <select name="period" required>
+                    <option value="1mo">1 Bulan (1mo)</option>
+                    <option value="3mo">3 Bulan (3mo)</option>
+                    <option value="6mo">6 Bulan (6mo)</option>
+                    <option value="1y" selected>1 Tahun (1y)</option>
+                    <option value="2y">2 Tahun (2y)</option>
+                    <option value="5y">5 Tahun (5y)</option>
+                    <option value="max">Maksimal (max)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">⬇️ Download Data (CSV)</button>
+            <a href="/" class="btn-cancel">Kembali ke Dashboard</a>
+        </form>
+    </div>
+</body>
+
+</html>
