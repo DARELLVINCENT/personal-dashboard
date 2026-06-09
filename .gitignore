@@ -1,43 +1,21 @@
-# =====================
-# SENSITIVE FILES
-# =====================
-.env
-
-# =====================
-# PYTHON
-# =====================
-__pycache__/
-*.py[cod]
-*$py.class
-*.pyc
-*.pyo
-*.pyd
-
 # Virtual Environments
 env/
 venv/
-.venv/
-ENV/
+.env
+.env.local
 
-# Distribution / Packaging
-dist/
-build/
-*.egg-info/
-*.egg
+# Node
+node_modules/
+.next/
 
-# =====================
-# IDE & OS
-# =====================
+# Python
+__pycache__/
+*.pyc
+
+# IDEs
 .vscode/
 .idea/
-*.suo
-*.user
-.DS_Store
-Thumbs.db
 
-# =====================
-# LOGS & TEMP
-# =====================
-*.log
-*.tmp
-*.bak
+# Custom tests
+test-file/
+python-undertestfeature/
