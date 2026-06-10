@@ -23,8 +23,8 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-logo">PORTFOLIO</div>
-      <div className="sidebar-subtitle">Trading Journal v2.0</div>
+      <div className="sidebar-logo">{user.username}</div>
+      <div className="sidebar-subtitle">Personal Dashboard</div>
 
       <nav className="sidebar-nav">
         {items.map((item) => (
