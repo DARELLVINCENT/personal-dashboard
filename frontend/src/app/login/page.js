@@ -33,8 +33,8 @@ export default function LoginPage() {
     <div className="login-page">
       <div className="login-card">
         <div className="login-logo">
-          <h1>PORTFOLIO</h1>
-          <p>Trading Journal v2.0</p>
+          <h1>Personal</h1>
+          <p>Dashboard</p>
         </div>
 
         {error && <div className="login-error">{error}</div>}
@@ -56,7 +56,7 @@ export default function LoginPage() {
         </form>
 
         <p style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: 'var(--text-muted)' }}>
-          FastAPI + Next.js · Portfolio Tracker
+          Powered by FastAPI + Next.js + Supabase
         </p>
       </div>
     </div>
